@@ -6,6 +6,6 @@
 *.code-workspace
 !*.cpp
 !'CSES_Solutions (S)'
-
+*
 
 .history/

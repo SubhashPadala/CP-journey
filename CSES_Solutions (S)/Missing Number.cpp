@@ -41,6 +41,7 @@ void solve()
     ll sum=n*(n+1)/2;
     n--;
     while(n--){
+    
         cin>>input;
         sum-=input;
     }

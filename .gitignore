@@ -4,6 +4,8 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+!*.cpp
+!'CSES_Solutions (S)'
 
 
 .history/

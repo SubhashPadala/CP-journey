@@ -1,9 +1,0 @@
-.vscode/*
-
-*.code-workspace
-!*.cpp
-'CSES_Solutions (S)'/*
-!'CSES_Solutions (S)'/*.cpp
-
-
-.history/

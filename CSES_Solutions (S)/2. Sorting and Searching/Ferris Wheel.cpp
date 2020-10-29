@@ -36,39 +36,28 @@ int main()
 
 void solve()
 {
-    map<ll, ll> weight_count;
-    ll n, x, weight;
+    ll n, x;
     cin>>n>>x;
-    while(n--){
-        cin>>weight;
-        weight_count[weight]+=1;
-    }
-    auto i = weight_count.begin();
-    auto j = weight_count.end();
-    ll count=0;
-    while((i->first<(j->first))){
-        if((i->first)+(j->first)<=x){
-            i->second--;
-            j->second--;
+    ll weights[n];
+    for(ll i=0; i<n; i++)cin>>weights[i];
+    sort(weights, weights+n);
+    ll count, visited, i;
+    i=count=visited=0;
+    ll j=n-1;
+    while(i<j){
+        if(weights[i]+weights[j]<=x){
             count++;
-            if(i->second==0)i++;
-            if(j->second==0)j--;
+            visited+=2;
+            i++;
+            j--;
         }
         else{
-            count+=j->second;
-            j->second=0;
+            count++;
+            visited+=1;
             j--;
         }
     }
-    if(i->first==j->first){
-            count+=(i->second%2==0)?(i->second/2):(i->second/2+1);
-            i->second=0;
-    }
-    for(auto i=weight_count.begin(); i!=weight_count.end(); i++){
-        weight+=i->second;
-    } 
-    weight+=i->second;
-    cout<<weight;
-    cout<<"count"<<count<<endl;
+    if(i==j)count++;
+    cout<<count;
     return;
 }

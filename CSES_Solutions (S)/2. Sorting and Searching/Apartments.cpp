@@ -7,8 +7,8 @@
 using namespace std;
 void solve();
 
-#define FOR(i,a,b) for(int i = a; i < b; ++i)
-#define RFOR(i,a,b) for(int i = a; i >= b; --i)
+#define FOR(i,a,b) for(long long i = a; i < b; ++i)
+#define RFOR(i,a,b) for(long long i = a; i >= b; --i)
 #define gcx getchar_unlocked
 #define pcx putchar_unlocked
 #define ll long long
@@ -36,23 +36,30 @@ int main()
 
 void solve()
 {
-    ll n, m, k;
+    ll n, m, k, appa;
     cin>>n>>m>>k;
-    map<ll, ll> req;
-    ll req_size[n];
-    ll avail_size[n];
-    FOR(i, 0, n)cin>>req_size[i];
-    FOR(i, 0, m)cin>>avail_size[i];
-    sort(req_size, req_size+n);
-    sort(avail_size, avail_size+m);
-    ll j=0, count=0;
-    FOR(i, 0, n){
-        FOR(j, 0, m){
-            if(req_size[i]-k<=avail_size[j] && req_size[i]+k>=avail_size[j]){
+    vector<ll> avail;
+    vector<ll> appl;
+    FOR(i, 0, n){cin>>appa;appl.push_back(appa);}
+    FOR(i, 0, m){cin>>appa;avail.push_back(appa);}
+    ll count=0;
+    sort(avail.begin(), avail.end());
+    sort(appl.begin(), appl.end());
+    while(!avail.empty() && !appl.empty())
+    {
+            if(appl.back()-k<=avail.back() && appl.back()+k>=avail.back())
+            {
+                avail.pop_back();
+                appl.pop_back();
                 count++;
-                break;
             }
-        }
+            else if(avail.back()>appl.back()+k){
+                avail.pop_back();
+            }
+            else if(appl.back()>avail.back()+k){
+                appl.pop_back();
+            }
     }
+    cout<<count;
     return;
 }

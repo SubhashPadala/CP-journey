@@ -1,6 +1,6 @@
 /*
  *     User: eu18
- *     Problem: Distinct Numbers
+ *     Problem: Apartments
  */
 
 #include <bits/stdc++.h>

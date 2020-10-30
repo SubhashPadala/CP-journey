@@ -34,12 +34,12 @@ int main()
     return 0;
 }
 
-int visited[1000001];
+bool visited[1000001];
 vector<int> adj[1000001];
 
 void dfs(int x)
 {
-    visited[x]=1;
+    visited[x]=true;
     for(auto& i : adj[x])
         if(visited[i]==false)
             dfs(i);

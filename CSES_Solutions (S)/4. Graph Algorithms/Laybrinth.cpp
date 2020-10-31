@@ -8,16 +8,17 @@ using namespace std;
 const int MAX_N = 1e6+7;
 void solve();
 #define ll long long
-void BFS(ll source, ll destination);
-char get_direction(ll source, ll destination);
 #define FOR(i,a,b) for(int i = a; i < b; ++i)
 #define RFOR(i,a,b) for(int i = a; i >= b; --i)
 
+void BFS(ll source, ll destination);
+char get_direction(ll source, ll destination);
+void get_pathnlen(ll source, ll destination);
 
 ll n, m;
 bool visited[MAX_N];
 vector<ll> adj[MAX_N];
-vector<char> path;
+ll parent[MAX_N];
 
 int main()
 {
@@ -56,36 +57,49 @@ char get_direction(ll source, ll destination)
     return '0';
 }
 
+void get_pathnlen(ll source, ll destination)
+{
+    string path;
+    ll i = destination;
+    //FOR(i, 0, destination+1)cout<<parent[i];
+    //cout<<get_direction(parent[destination], destination);
+    //return;
+    while(1)
+    {
+        path.push_back(get_direction(parent[i], i));
+        //cout<<'acd';
+        if(parent[i]==source)
+        {
+            cout<<"YES\n"<<path.size()<<"\n";
+            RFOR(i, path.size()-1, 0)cout<<path[i];
+            return;
+        }
+        i=parent[i];
+    }
+    return;
+}
+
+
 void BFS(ll source, ll destination)
 {
-    queue<vector<char>> paths;
     queue<ll> q;
-    vector<char> curr_path;
-    curr_path.push_back('X');
-    paths.push(curr_path);
     q.push(source);
     visited[source]=true;
     while(q.size())
     {
-        curr_path = paths.front();
-        paths.pop();
         int last = q.front();
         q.pop();
         if(last==destination)
         {
-            string s(++curr_path.begin(), curr_path.end());
-            cout<<"YES\n"<<s.length()<<"\n"<<s;
-            cout<<endl;
+            //cout<<"YES"<<endl;
+            get_pathnlen(source, destination);
             return;
         }
         for(auto i : adj[last])
         {
             if(!visited[i])
             {
-                vector<char> newpath(curr_path);
-                char direction = get_direction(last, i);
-                newpath.push_back(direction);
-                paths.push(newpath);
+                parent[i]=last;
                 q.push(i);
                 visited[i]=true;
             }
@@ -178,22 +192,11 @@ void solve()
             }
         }
     }
-    /*FOR(i, 0, n)
-    {
-        FOR(j, 0, m)
-        {
-            cout<<endl;
-            cout<<i*m+j<<" : ";
-            for(auto k : adj[i*m+j])cout<<k<<", ";
-            cout<<endl;
-        }
-    }*/
     if(get_direction(source, destination)!='0')
     {
         cout<<"YES\n1\n"<<get_direction(source, destination);
         return;
     }
-    //cout<<source<<destination<<endl;
     BFS(source, destination);
     return;
 }

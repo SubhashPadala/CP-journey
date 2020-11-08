@@ -37,6 +37,19 @@ int main()
 
 void solve()
 {
+    ll n, count = 0;
+    cin>>n;
+    if(n==2 || n==3)cout<<"NO SOLUTION";
+    else if(n==1)cout<<n;
+    else
+    {
+        FOR(i, 1, n+1)
+            if(!(i&1))
+                cout<<i<<" ";
+        FOR(i, 1, n+1)
+            if(i&1)
+                cout<<i<<" ";
+    }
     
     return;
 }

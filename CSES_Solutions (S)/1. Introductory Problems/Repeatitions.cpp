@@ -19,7 +19,7 @@ int main()
 
     #ifndef ONLINE_JUDGE
     freopen("inputf.txt", "r", stdin);
-    freopen("outputf.txt", "w", stdout);
+    freopen("out.txt", "w", stdout);
     #endif
 
     int t=1;
@@ -37,6 +37,20 @@ int main()
 
 void solve()
 {
-    
+    char last = '\0';
+    string input;
+    cin>>input;
+    int count=0, maximum =0;
+    for(auto c: input)
+    {
+        if(c!=last)
+        {
+            maximum = max(count, maximum);
+            count = 0;
+        }
+        else count++;
+        last = c;
+    }
+    cout<<max(count, maximum)+1;
     return;
 }

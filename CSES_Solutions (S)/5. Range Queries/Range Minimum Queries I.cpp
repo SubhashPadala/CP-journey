@@ -44,7 +44,7 @@ void solve()
     {
         logs[i] = logs[i/2]+1;
     }
-    ll table[logs[n]][n+1]={0};
+    ll table[logs[n]+1][n+1]={0};
     ll p = logs[n]+1;
     ll curr_len, end_;
     FOR(i, 0, p)

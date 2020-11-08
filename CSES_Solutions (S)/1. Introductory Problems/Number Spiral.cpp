@@ -23,7 +23,7 @@ int main()
     #endif
 
     int t=1;
-    //cin >> t;
+    cin >> t;
     while(t--)
     {
         solve();
@@ -37,6 +37,24 @@ int main()
 
 void solve()
 {
-    
+    ll y, x;
+    cin>>y>>x;
+    ll k = max(x, y);
+    if(k%2==0 && y==k)
+    {
+        cout<<k*k-x+1;
+    }
+    else if(k%2==0 && x==k)
+    {
+        cout<<(k-1)*(k-1)+y;
+    }
+    else if(y==k)
+    {
+        cout<<(k-1)*(k-1)+x;
+    }
+    else if(x==k)
+    {
+        cout<<k*k-y+1;
+    }
     return;
 }

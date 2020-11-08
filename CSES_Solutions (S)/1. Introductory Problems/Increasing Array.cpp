@@ -37,6 +37,21 @@ int main()
 
 void solve()
 {
-    
+    ll n, count=0, prev, curr;
+    cin>>n;
+    cin>>prev;
+    FOR(i, 1, n)
+    {
+        cin>>curr;
+        if((curr-prev)<0)
+        {
+            count +=prev-curr;
+        }
+        else 
+        {
+            prev = curr;
+        }
+    }
+    cout<<count;
     return;
 }

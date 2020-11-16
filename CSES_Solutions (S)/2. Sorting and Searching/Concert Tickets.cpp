@@ -36,42 +36,28 @@ int main()
 
 void solve()
 {
-    ll n, m, p=0, j =0;
-    cin>>n>>m;
-
-    ll price[n];
-    ll max_aff[m];
-    FOR(i, 0, n)cin>>price[i];
-    FOR(i, 0, m)cin>>max_aff[i];
-    sort(price, price+n);
-    sort(max_aff, max_aff+m);
-    FOR(i, 0, m)
+    ll n, m, curr, ticket;
+    cin>> n >> m;
+    multiset<ll, greater<ll>> tickets;
+    while(n--)
     {
-        p = 0;
-        while(true)
-        {   
-            if(max_aff[i]>=price[j])
-            {
-                p = price[j];
-                j++;
-                if(price[j-1]==max_aff[i])
-                {
-                    cout<<p<<endl;
-                    break;
-                }
-                continue;
-            }
-            else if(p)
-            {
-                cout<<p<<endl;
-                break;
-            }
-            else if(!p)
-            {
-                cout<<-1<<endl;
-                break;
-            }
+        cin>>ticket;
+        tickets.insert(ticket);
+    }
+    while(m--)
+    {
+        cin>>curr;
+        auto it = tickets.lower_bound(curr);
+        if(it == tickets.end())
+        {
+            cout << -1 << endl;
         }
+        else
+        {
+            cout<< *it << endl;
+            tickets.erase(it);
+        }
+        
     }
     return;
 }
